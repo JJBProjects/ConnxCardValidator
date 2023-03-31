@@ -1,0 +1,54 @@
+﻿@model CardValidationViewModel
+
+<br />
+<h3>Credit Card Validator</h3>
+<div>
+<form asp-action="Index" method="post" class="form-horizontal" role="form">
+    <div class="form-group">
+        <label asp-for="CardTypeId" class="col-md-2 control-label">Card Type</label>
+        <div class="col-md-5">
+            <select asp-for="CardTypeId" asp-items="@Model.CardTypes" class="form-control"></select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CardNumber" class="col-md-2 control-label">Card Number</label>
+        <div class="col-md-5">
+            <input asp-for="CardNumber" class="form-control" />
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-5">
+            <input type="submit" class="btn btn-primary" value="Validate Card" />
+        </div>
+    </div>
+
+</form>
+</div>
+
+<br />
+
+<span asp-validation-for="CardNumber" class="text-danger"></span>
+
+@if (!String.IsNullOrEmpty(@Model.ValidationSummary))
+{
+    if(@Model.IsValid)
+    {
+        <div class="alert alert-success" role="alert">
+            <span style="white-space: pre-line">@Model.ValidationSummary</span>
+        </div>
+    }
+    else
+    {
+            
+        <div class="alert alert-danger" role="alert">
+            <span style="white-space: pre-line">@Model.ValidationSummary</span>
+        </div>
+    }
+}
+
+
+
+
+
